@@ -9,7 +9,7 @@ library(sads)
 
 ## Input parameters: 
 
-LinkCapacity = 100 # 10 Gbps
+LinkCapacity = 100e9 # 100 Gbps
 Load = 0.4 # 40% load
 
 # Packet characteristics
@@ -17,19 +17,15 @@ PacketSizeDistribution = c(64,596,1500) # Trimodal distribution, packet size (by
 PacketSizeWeights = c(4/12,2/12,6/12) # Trimodal distribution, packet weigths (percentage)
 
 AvgPacketSize = sum(8*PacketSizeDistribution*PacketSizeWeights) # 870 Bytes, matches Poland University
-AvgServiceTime = AvgPacketSize/(LinkCapacity*1e9) # EX from queueing theory
+AvgServiceTime = AvgPacketSize/(LinkCapacity) # EX from queueing theory
 
 
 # Flow characteristics 
 # AvgFlowSize = 68410 Bytes or 78.5 packets (as it follows from Poland University trace)
-Nflows = 7000 # configurable, 7000 flow IDs
+Nflows = 1e4 # configurable, 7000 flow IDs
 alpha = 1.1 # zipf alpha distribution, top-20 flows comprises 49% of traffic
 
-
-
-
-
-Npackets = round(Nflows*78.5)
+Npackets = round(Nflows*78.5) # total number of packets, the average is 68410 bytes per flow
 
 
 PDF <- dzipf(x=c(1:Nflows), N=Nflows, s=alpha)
@@ -41,12 +37,12 @@ CDF <- pzipf(q=c(1:Nflows), N=Nflows, s=alpha)
 
 Window = 0.1 # 100 ms of trace
 
-Nbits = Load*(LinkCapacity*1e9)*Window
+Nbits = Load*(LinkCapacity)*Window
 Npackets = round(Nbits/AvgPacketSize)
 
 lambda = Load/AvgServiceTime # M/G/1 assumed
 
-simArrivals = cumsum(rexp(1.5*Npackets,rate=lambda))
+simArrivals = cumsum(rexp(1.2*Npackets,rate=lambda))
 simArrivals = simArrivals[which(simArrivals<Window)]
 
 simflowIDs = sample(c(1:Nflows), size = length(simArrivals), prob=PDF, replace=TRUE)
