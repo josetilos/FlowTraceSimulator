@@ -19,7 +19,8 @@ AvgPacketSize = sum(8*PacketSizeDistribution*PacketSizeWeights) # 870 Bytes, mat
 AvgServiceTime = AvgPacketSize/(LinkCapacity*1e9) # EX from queueing theory
 
 
-# Flow characteristics
+# Flow characteristics 
+# AvgFlowSize = 68410 Bytes or 78.5 packets (as it follows from Poland University trace)
 Nflows = 7000 # configurable, 7000 flow IDs
 alpha = 1.1 # zipf alpha distribution, top-20 flows comprises 49% of traffic
 
@@ -64,7 +65,6 @@ write.csv(simulationTrace.df, "Trace100G.csv", row.names=TRUE)
 
 
 
-#flowpacket = ceiling(PDF*npackets)
 
 
 
@@ -73,7 +73,6 @@ write.csv(simulationTrace.df, "Trace100G.csv", row.names=TRUE)
 
 
 
-AvgFlowSize =  # 68410 Bytes or 78.5 packets
 
 
 
