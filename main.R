@@ -3,6 +3,7 @@
 # 30th May 2024
 
 
+if (!require("sads")) install.packages("sads")
 library(sads)
 
 
