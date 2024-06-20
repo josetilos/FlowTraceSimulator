@@ -11,9 +11,14 @@ The script produces a CSV file named `Trace100G.csv`, which contains the simulat
   - FlowID: The flow ID to which the packet belongs.
   - PacketSize: The size of the packet in bytes.
 The following is an example of the first rows of the CSV:
+
 "ArrivalTime","FlowID","PacketSize"
+
 0.00000123,5,64
+
 0.00000234,7,1500
+
 0.00000345,3,596
+
 ...
 
