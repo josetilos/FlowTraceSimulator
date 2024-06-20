@@ -1,5 +1,4 @@
-This dataset comes from a piece of code for generating a packet trace as it would arrive to a 100G port in a packet-optical router. 
-The R script simulates network flow traces based on given link capacity, load, and packet/flow characteristics. It generates a trace file that can be used for network analysis and research purposes. The script then outputs the trace data to a CSV file.
+This R script simulates network flow traces based on given link capacity, load, and packet/flow characteristics. It generates a trace file that can be used for network analysis and research purposes. The script then outputs the trace data to a CSV file.
 As input parameters, the simulator takes into account:
 - LinkCapacity: The capacity of the link in bits per second (bps); by default 100 Gbps.
 - Link Load: The load on the link as a fraction of the total capacity, by default 0.4 (or 40% load).
